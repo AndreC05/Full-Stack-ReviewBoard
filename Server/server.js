@@ -10,10 +10,23 @@ app.use(express.json());
 app.use(cors());
 dotenv.config();
 
-//endpoints
+//connect to database
+const db = new pg.Pool({ connectionString: process.env.DB_CONN_STRING });
+
+//Endpoints
+//Root route
 app.get("/", (request, response) => {
   response.send("Root route");
 });
+
+// /reviews get
+app.get("/reviews", async (request, response) => {
+  const result = await db.query("SELECT * FROM reviews");
+  const reviews = result.rows;
+  response.send(reviews);
+});
+
+// /reviews post
 
 app.listen("8080", () => {
   console.log("Server running on port 8080");

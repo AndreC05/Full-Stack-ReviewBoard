@@ -27,7 +27,21 @@ app.get("/reviews", async (request, response) => {
 });
 
 // /reviews post
+app.post("/reviews", async (request, response) => {
+  //get request body
+  const { author, content } = request.body;
 
+  //query to database
+  const insertData = await db.query(
+    `INSERT INTO reviews (author, content) VALUES ($1, $2)`,
+    [author, content]
+  );
+
+  //response
+  response.json(insertData);
+});
+
+//port
 app.listen("8080", () => {
   console.log("Server running on port 8080");
 });

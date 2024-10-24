@@ -13,11 +13,29 @@
     </header>
 
     <main>
-      <form id="userForm">
-        <input name="author" placeholder="Username" />
-        <input name="content" placeholder="Review" />
-        <button>Submit</button>
-      </form>
+      <div id="inputsDiv">
+        <form id="userForm">
+          <input
+            name="author"
+            placeholder="Username"
+            maxlength="64"
+            minlength="3"
+            required
+          />
+          <textarea
+            name="content"
+            placeholder="Review"
+            form="userForm"
+            maxlength="255"
+            rows="5"
+            cols="75"
+            required
+          ></textarea>
+          <button>Submit</button>
+        </form>
+      </div>
+
+      <div id="outputsDiv"></div>
     </main>
   </body>
 </html>

@@ -1,6 +1,27 @@
 const userForm = document.getElementById("userForm");
+const submitBtn = document.getElementById("submitBtn");
 const outputDiv = document.getElementById("outputDiv");
 const fetchUrl = "http://localhost:8080/reviews";
+
+//Play click sound
+function playClickSound() {
+  const click = new Audio("./assets/click.mp3");
+  click.play();
+}
+
+submitBtn.addEventListener("click", playClickSound);
+
+//play like sound
+function playLikeSound() {
+  const like = new Audio("./assets/yay.mp3");
+  like.play();
+}
+
+//play delete sound
+function playDeleteSound() {
+  const deleteSound = new Audio("./assets/deleteBtn.mp3");
+  deleteSound.play();
+}
 
 //handle form data submition
 async function handleSubmit(event) {
@@ -25,7 +46,7 @@ async function handleSubmit(event) {
 // increase likes by 1 and send PUT request
 async function handleLike(event) {
   // get the id of the review to update from the id of the button
-  const reviewId = event.target.id.slice(-1);
+  const reviewId = event.target.id.replace("likeBtn", "");
 
   const body = {
     id: reviewId,
@@ -46,7 +67,7 @@ async function handleLike(event) {
 //handle function for delete button
 async function handleDelete(event) {
   // get the id of the review to delete
-  const reviewId = event.target.id.slice(-1);
+  const reviewId = event.target.id.replace("deleteBtn", "");
 
   const body = {
     id: reviewId,
@@ -67,6 +88,7 @@ async function handleDelete(event) {
 //Create elements of each review post
 function createReviewElements(listOfReviews, currentIndex) {
   const reviewDiv = document.createElement("div");
+  const interactDiv = document.createElement("div");
   const reviewAuthor = document.createElement("h3");
   const reviewContent = document.createElement("p");
   const reviewDate = document.createElement("h4");
@@ -74,29 +96,38 @@ function createReviewElements(listOfReviews, currentIndex) {
   const likeCount = document.createElement("h4");
   const deleteBtn = document.createElement("button");
 
-  reviewDiv.setAttribute("id", `review${currentIndex}`);
+  reviewDiv.setAttribute("id", `review${listOfReviews[currentIndex].id}`);
+  reviewDiv.setAttribute("class", "reviewDiv");
+  interactDiv.setAttribute("class", "interactDiv");
   reviewAuthor.textContent = listOfReviews[currentIndex].author;
   reviewContent.textContent = listOfReviews[currentIndex].content;
   reviewDate.textContent = listOfReviews[currentIndex].date;
   likeBtn.textContent = "Like";
   likeBtn.setAttribute("id", `likeBtn${listOfReviews[currentIndex].id}`);
+  likeBtn.setAttribute("class", "likeBtn");
   likeCount.textContent = listOfReviews[currentIndex].likes;
   deleteBtn.textContent = "Delete";
   deleteBtn.setAttribute("id", `deleteBtn${listOfReviews[currentIndex].id}`);
+  deleteBtn.setAttribute("class", "deleteBtn");
 
   //event listner for like button
   likeBtn.addEventListener("click", handleLike);
+  likeBtn.addEventListener("click", playLikeSound);
 
   //event listner for delete button
   deleteBtn.addEventListener("click", handleDelete);
+  deleteBtn.addEventListener("click", playDeleteSound);
+
+  //append buttons and counter to new div
+  interactDiv.appendChild(likeBtn);
+  interactDiv.appendChild(likeCount);
+  interactDiv.appendChild(deleteBtn);
 
   //Append new elements to the new div
   reviewDiv.appendChild(reviewAuthor);
   reviewDiv.appendChild(reviewContent);
   reviewDiv.appendChild(reviewDate);
-  reviewDiv.appendChild(likeBtn);
-  reviewDiv.appendChild(likeCount);
-  reviewDiv.appendChild(deleteBtn);
+  reviewDiv.appendChild(interactDiv);
 
   //append new div to outputDiv
   outputDiv.appendChild(reviewDiv);

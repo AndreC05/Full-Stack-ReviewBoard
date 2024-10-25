@@ -22,8 +22,17 @@ app.get("/", (_, response) => {
 // /reviews get
 app.get("/reviews", async (_, response) => {
   //order reviews in descending order
-  const result = await db.query("SELECT * FROM reviews ORDER BY id DESC");
+  const result = await db.query(`SELECT 
+      id, 
+      author, 
+      content, 
+      TO_CHAR(date, 'DD-MM-YYYY') AS date, 
+      likes 
+     FROM reviews 
+     ORDER BY id DESC`);
+
   const reviews = result.rows;
+
   response.send(reviews);
 });
 

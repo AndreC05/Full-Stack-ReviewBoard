@@ -1,0 +1,163 @@
+body,
+html,
+h1,
+h3,
+h4,
+p,
+input,
+textarea,
+button {
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: rgb(37, 33, 33);
+  color: deeppink;
+}
+
+body button {
+  width: 70px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #912cf0c7;
+  color: rgb(248, 138, 35);
+}
+
+body button:hover {
+  border: 2px dashed rgb(146, 255, 3);
+}
+
+body button:active {
+  background-color: rgb(88, 190, 19);
+  box-shadow: 0 5px #111010;
+  transform: translateY(1px);
+  transition: 0.2s;
+}
+
+/*   Header   */
+header {
+  background: transparent;
+  color: rgb(250, 128, 79);
+  font-size: 0.9rem;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.8em;
+  margin-bottom: 20px;
+  width: 100vw;
+}
+
+header h4 {
+  font-size: 0.5rem;
+}
+
+/*    Main    */
+main {
+  display: grid;
+  grid-template-rows: 3rem 10rem 3rem 1fr;
+  grid-auto-flow: column;
+}
+
+main #formTitle {
+  color: rgb(250, 151, 4);
+  font-size: 1.5rem;
+  grid-row: 1;
+  place-self: center;
+}
+
+/*    Form    */
+main #inputDiv {
+  grid-row: 2;
+  place-self: center;
+}
+
+#inputDiv input {
+  width: 400px;
+  background-color: antiquewhite;
+  margin-bottom: 0.5rem;
+}
+
+#inputDiv textarea {
+  width: 400px;
+  background-color: antiquewhite;
+  margin-bottom: 0.5rem;
+}
+
+/*    reviews Div    */
+main #reviewTitle {
+  grid-row: 3;
+  margin: 1rem;
+  color: rgb(250, 151, 4);
+}
+
+main #outputDiv {
+  grid-row: 4;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.reviewDiv {
+  border: 4px double rgb(14, 52, 59);
+  margin: 1rem;
+  margin-left: 0;
+  margin-right: 0;
+  gap: 5px;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+/*   Review content   */
+.reviewDiv h3 {
+  color: rgba(223, 2, 186, 0.856);
+  font-weight: bolder;
+}
+
+.reviewDiv p {
+  color: rgb(156, 7, 69);
+  font-weight: lighter;
+  font-style: italic;
+  font-size: small;
+}
+
+.reviewDiv h4 {
+  color: rgb(214, 3, 151);
+  font-size: x-small;
+}
+
+/* Review interaction section */
+.reviewDiv .interactDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.interactDiv h4 {
+  color: #97ee0b;
+  font-size: 1rem;
+}
+
+.deleteBtn:hover {
+  border: 2px dashed rgb(255, 0, 0);
+}
+
+.deleteBtn:active {
+  background-color: rgb(250, 5, 5);
+  box-shadow: 0 5px #450061;
+  transform: translateY(1px);
+  transition: 0.2s;
+}

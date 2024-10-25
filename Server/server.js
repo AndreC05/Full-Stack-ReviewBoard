@@ -15,13 +15,14 @@ const db = new pg.Pool({ connectionString: process.env.DB_CONN_STRING });
 
 //Endpoints
 //Root route
-app.get("/", (request, response) => {
+app.get("/", (_, response) => {
   response.send("Root route");
 });
 
 // /reviews get
-app.get("/reviews", async (request, response) => {
-  const result = await db.query("SELECT * FROM reviews");
+app.get("/reviews", async (_, response) => {
+  //order reviews in descending order
+  const result = await db.query("SELECT * FROM reviews ORDER BY id DESC");
   const reviews = result.rows;
   response.send(reviews);
 });
@@ -39,6 +40,22 @@ app.post("/reviews", async (request, response) => {
 
   //response
   response.json(insertData);
+});
+
+//reviews put
+app.put("/reviews", async (request, response) => {
+  const { id } = request.body;
+  const updateLikes = await db.query(
+    `UPDATE reviews SET likes = likes + 1 WHERE id = ${id}`
+  );
+  response.send(updateLikes);
+});
+
+//reviews put
+app.delete("/reviews", async (request, response) => {
+  const { id } = request.body;
+  const updateLikes = await db.query(`DELETE FROM reviews WHERE id = ${id}`);
+  response.send(updateLikes);
 });
 
 //port

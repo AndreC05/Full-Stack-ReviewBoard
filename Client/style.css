@@ -107,8 +107,8 @@ main #outputDiv {
 .reviewDiv {
   border: 4px double rgb(14, 52, 59);
   margin: 1rem;
-  margin-left: 0;
-  margin-right: 0;
+  margin-left: 10px;
+  margin-right: 10px;
   gap: 5px;
   max-width: 100vw;
   display: flex;
@@ -160,4 +160,65 @@ main #outputDiv {
   box-shadow: 0 5px #450061;
   transform: translateY(1px);
   transition: 0.2s;
+}
+
+/*                        Screen Size 600px                                 */
+@media (max-width: 600px) {
+  header {
+    font-size: 0.7rem;
+  }
+
+  header h4 {
+    font-size: 0.4rem;
+  }
+
+  body button {
+    width: 50px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+  }
+
+  main #formTitle {
+    font-size: 1rem;
+    grid-row: 1;
+    justify-self: start;
+    align-self: center;
+  }
+
+  main #inputDiv {
+    justify-self: start;
+    align-self: center;
+  }
+
+  #inputDiv input {
+    width: 150px;
+    margin-bottom: 0.5rem;
+  }
+
+  #inputDiv textarea {
+    width: 250px;
+    margin-bottom: 0.5rem;
+  }
+
+  main #reviewTitle {
+    margin: 0.4rem;
+    font-size: 1.2rem;
+  }
+
+  main #outputDiv {
+    row-gap: 10px;
+  }
+
+  .reviewDiv h3 {
+    font-size: 0.9rem;
+    font-weight: bolder;
+  }
+
+  .reviewDiv p {
+    font-size: x-small;
+  }
+
+  .reviewDiv h4 {
+    font-size: xx-small;
+  }
 }

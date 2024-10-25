@@ -3,6 +3,13 @@ const submitBtn = document.getElementById("submitBtn");
 const outputDiv = document.getElementById("outputDiv");
 const fetchUrl = "http://localhost:8080/reviews";
 
+const userName = usernameInput();
+
+//ask for username
+function usernameInput() {
+  return prompt("What is your username?");
+}
+
 //Play click sound
 function playClickSound() {
   const click = new Audio("./assets/click.mp3");
@@ -69,20 +76,31 @@ async function handleDelete(event) {
   // get the id of the review to delete
   const reviewId = event.target.id.replace("deleteBtn", "");
 
-  const body = {
-    id: reviewId,
-  };
+  //get name of the author of the post
+  const authorData = document.getElementById(`author${reviewId}`);
+  const authorName = authorData.textContent;
 
-  //make put request
-  const response = await fetch(fetchUrl, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
+  //ensure only author of the post can delete comment
+  if (authorName === userName) {
+    const body = {
+      id: reviewId,
+    };
 
-  // update review like count
-  resetOutput();
-  handleGetReviews();
+    //make put request
+    const response = await fetch(fetchUrl, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    // update review like count
+    resetOutput();
+    handleGetReviews();
+  } else {
+    alert(
+      "You are not the author of this post. Only the author can delete this post"
+    );
+  }
 }
 
 //Create elements of each review post
@@ -96,18 +114,26 @@ function createReviewElements(listOfReviews, currentIndex) {
   const likeCount = document.createElement("h4");
   const deleteBtn = document.createElement("button");
 
-  reviewDiv.setAttribute("id", `review${listOfReviews[currentIndex].id}`);
+  const id = listOfReviews[currentIndex].id;
+  const content = listOfReviews[currentIndex].content;
+  const author = listOfReviews[currentIndex].author;
+  const likes = listOfReviews[currentIndex].likes;
+  const date = listOfReviews[currentIndex].date;
+
+  //Set attributes and textcontent
+  reviewDiv.setAttribute("id", `review${id}`);
   reviewDiv.setAttribute("class", "reviewDiv");
   interactDiv.setAttribute("class", "interactDiv");
-  reviewAuthor.textContent = listOfReviews[currentIndex].author;
-  reviewContent.textContent = listOfReviews[currentIndex].content;
-  reviewDate.textContent = listOfReviews[currentIndex].date;
+  reviewAuthor.textContent = author;
+  reviewAuthor.setAttribute("id", `author${id}`);
+  reviewContent.textContent = content;
+  reviewDate.textContent = date;
   likeBtn.textContent = "Like";
-  likeBtn.setAttribute("id", `likeBtn${listOfReviews[currentIndex].id}`);
+  likeBtn.setAttribute("id", `likeBtn${id}`);
   likeBtn.setAttribute("class", "likeBtn");
-  likeCount.textContent = listOfReviews[currentIndex].likes;
+  likeCount.textContent = likes;
   deleteBtn.textContent = "Delete";
-  deleteBtn.setAttribute("id", `deleteBtn${listOfReviews[currentIndex].id}`);
+  deleteBtn.setAttribute("id", `deleteBtn${id}`);
   deleteBtn.setAttribute("class", "deleteBtn");
 
   //event listner for like button

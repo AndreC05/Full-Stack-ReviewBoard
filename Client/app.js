@@ -86,7 +86,7 @@ async function handleDelete(event) {
       id: reviewId,
     };
 
-    //make put request
+    //make delete request
     const response = await fetch(fetchUrl, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -94,7 +94,7 @@ async function handleDelete(event) {
     });
 
     //play sound
-    playDeleteSound;
+    playDeleteSound();
 
     // update review like count
     resetOutput();

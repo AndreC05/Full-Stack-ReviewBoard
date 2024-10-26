@@ -1,7 +1,7 @@
 const userForm = document.getElementById("userForm");
 const submitBtn = document.getElementById("submitBtn");
 const outputDiv = document.getElementById("outputDiv");
-const fetchUrl = "https://full-stack-reviewboard.onrender.com";
+const fetchUrl = "https://full-stack-reviewboard.onrender.com/reviews";
 
 const userName = usernameInput();
 

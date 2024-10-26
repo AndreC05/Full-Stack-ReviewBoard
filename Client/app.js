@@ -12,7 +12,7 @@ function usernameInput() {
 
 //Play click sound
 function playClickSound() {
-  const click = new Audio("/assets/click.mp3");
+  const click = new Audio("./public/assets/click.mp3");
   click.play();
 }
 
@@ -20,13 +20,13 @@ submitBtn.addEventListener("click", playClickSound);
 
 //play like sound
 function playLikeSound() {
-  const like = new Audio("/assets/yay.mp3");
+  const like = new Audio("./public/assets/yay.mp3");
   like.play();
 }
 
 //play delete sound
 function playDeleteSound() {
-  const deleteSound = new Audio("/assets/deleteBtn.mp3");
+  const deleteSound = new Audio("./public/assets/deleteBtn.mp3");
   deleteSound.play();
 }
 
@@ -93,6 +93,9 @@ async function handleDelete(event) {
       body: JSON.stringify(body),
     });
 
+    //play sound
+    playDeleteSound;
+
     // update review like count
     resetOutput();
     handleGetReviews();
@@ -142,7 +145,6 @@ function createReviewElements(listOfReviews, currentIndex) {
 
   //event listner for delete button
   deleteBtn.addEventListener("click", handleDelete);
-  deleteBtn.addEventListener("click", playDeleteSound);
 
   //append buttons and counter to new div
   interactDiv.appendChild(likeBtn);

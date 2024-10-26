@@ -12,7 +12,7 @@ function usernameInput() {
 
 //Play click sound
 function playClickSound() {
-  const click = new Audio("./assets/click.mp3");
+  const click = new Audio("/assets/click.mp3");
   click.play();
 }
 
@@ -20,13 +20,13 @@ submitBtn.addEventListener("click", playClickSound);
 
 //play like sound
 function playLikeSound() {
-  const like = new Audio("./assets/yay.mp3");
+  const like = new Audio("/assets/yay.mp3");
   like.play();
 }
 
 //play delete sound
 function playDeleteSound() {
-  const deleteSound = new Audio("./assets/deleteBtn.mp3");
+  const deleteSound = new Audio("/assets/deleteBtn.mp3");
   deleteSound.play();
 }
 
